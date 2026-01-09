@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -24,8 +22,4 @@ public class UserModel {
     private String name;
     private String address;
     private String contactNumber;
-
-    // One user has many books
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<BookModel> books;
 }

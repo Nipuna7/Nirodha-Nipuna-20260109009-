@@ -1,5 +1,6 @@
 package com.example.bookmanagementsystem.controller;
 
+import com.example.bookmanagementsystem.dto.BookReportDto;
 import com.example.bookmanagementsystem.entity.BookModel;
 import com.example.bookmanagementsystem.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +12,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "*")
 public class BookController {
 
     @Autowired
     private BookService bookService;
 
-    // Display a list of all books in the inventory with their details
+    //Display a list of all books in the inventory with their details
     @GetMapping
     public ResponseEntity<List<BookModel>> getAllBooks() {
         List<BookModel> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
+    }
+
+    // Generate report showing total books and books by genre
+    @GetMapping("/report")
+    public ResponseEntity<BookReportDto> getBookReport() {
+        BookReportDto report = bookService.getBookReport();
+        return ResponseEntity.ok(report);
     }
 
     // Get a single book by ID
@@ -31,8 +38,8 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    // Add a new book to the inventory
-    @PostMapping("/add")
+    //Add a new book to the inventory
+    @PostMapping
     public ResponseEntity<BookModel> addBook(@RequestBody BookModel book) {
         BookModel savedBook = bookService.addBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
@@ -45,7 +52,7 @@ public class BookController {
         return ResponseEntity.ok(updatedBook);
     }
 
-    // DELETE
+    // Delete a book
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);

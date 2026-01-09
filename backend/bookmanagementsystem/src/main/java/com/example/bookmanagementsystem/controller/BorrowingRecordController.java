@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/borrowings")
-@CrossOrigin(origins = "*")
 public class BorrowingRecordController {
 
     @Autowired
@@ -60,7 +59,7 @@ public class BorrowingRecordController {
         return ResponseEntity.ok(borrowings);
     }
 
-    // POST /api/borrowings/borrow - Borrow a book
+    // Borrow a book
      //Request body example: {"userId": 1, "bookId": 1, "returningDate": "2026-01-20"}
     @PostMapping("/borrow")
     public ResponseEntity<BorrowingRecordModel> borrowBook(

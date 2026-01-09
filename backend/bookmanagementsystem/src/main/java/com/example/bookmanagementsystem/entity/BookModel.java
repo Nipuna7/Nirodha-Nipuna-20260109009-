@@ -23,9 +23,4 @@ public class BookModel {
     private String author;
     private String genre;
     private int quantity;
-
-    // Many books belong to one user
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
-    private UserModel user;
 }

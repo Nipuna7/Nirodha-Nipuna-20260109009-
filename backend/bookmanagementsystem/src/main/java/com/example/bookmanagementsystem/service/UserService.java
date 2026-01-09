@@ -13,7 +13,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    // Get all users
+   //Get all users
     public List<UserModel> getAllUsers() {
         return userRepository.findAll();
     }
@@ -24,7 +24,8 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
     }
 
-    // Add a new user/borrower
+
+    //Add a new user/borrower
     public UserModel addUser(UserModel user) {
         return userRepository.save(user);
     }
